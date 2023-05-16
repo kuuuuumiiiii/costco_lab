@@ -1,4 +1,4 @@
-# <Go SNEAKER>
+# Go SNEAKER
 
 ## サイト概要
 ### サイトテーマ
