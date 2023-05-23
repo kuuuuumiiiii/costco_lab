@@ -9,6 +9,60 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+  <header>
+                  <% if user_signed_in? %>
+
+
+                <li>
+                  <%= link_to users_my_page_path, class: 'nav-link text-dark' do %>
+                    <i class="fas fa-user"></i>マイページ
+                  <%end %>
+                </li>
+
+                <li>
+                  <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-dark' do %>
+                    <i class="fas fa-sign-out-alt"></i>ログアウト
+                  <% end %>
+                </li>
+
+
+              <!--管理者がログインしている場合-->
+              <% elsif  admin_signed_in? %>
+                <li>
+                  <%= link_to admin_users_path, class: 'nav-link text-dark' do %>
+                    <i class="fas fa-users"></i>会員一覧
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' do %>
+                    <i class="fas fa-sign-out-alt"></i>ログアウト
+                  <% end %>
+                </li>
+              <!--ログインしていない場合-->
+              <% else %>
+                <li>
+                  <%= link_to about_path, class: 'nav-link text-dark' do %>
+                    <i class="fas fa-link"></i>About
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to new_user_registration_path, class: 'nav-link text-dark' do %>
+                    <i class="fas fa-user-plus"></i>新規登録
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to new_user_session_path, class: 'nav-link text-dark' do %>
+                    <i class="fas fa-sign-in-alt"></i>ログイン
+                  <% end %>
+                </li>
+              <% end %>
+              </ul>
+                <%= form_with url: search_path, method: :get, local: true do |f| %>
+                <%= f.text_field :keyword, value: @keyword %>
+                <%= f.submit "検索" %>
+                <% end %>
+
+  </header>
 
   <body>
     <%= yield %>
