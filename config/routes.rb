@@ -36,13 +36,14 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create, :destroy]
       resource :wants, only: [:create, :destroy]
     end
+    resources :messages, only: [:create]
+    resources :rooms, only: [:create,:show]
     get 'search' => 'posts#search'
   end
 
     get '/admin' => 'admin/homes#top'
   namespace :admin do
     resources:users, only: [:index, :show, :edit, :update]
-    resources:orders, only: [:show, :update]
     resources:reports, only: [:index, :show, :update]
     get 'search' => 'posts#search'
   end
