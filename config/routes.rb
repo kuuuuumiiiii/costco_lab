@@ -17,21 +17,21 @@ Rails.application.routes.draw do
   get '/about' => 'public/homes#about'
 
   scope module: :public do
-    resources:users, only: [:edit, :update, :destroy] do
-      get ":user_id/follows" => "users#follows", as: "follows"
-      get ":user_id/followers" => "users#followers", as: "followers"
-      post "profile/:user_id/relation" => "relations#create", as: "relations_post"
-      delete "profile/:user_id/relation" => "relations#destroy", as: "relation_delete"
-      get "my_page" => "users#show"
-      get "profile/:user_id" => "users#profile", as: "profile"
-
-      post "profile/:user_id/report" => "reports#create", as: "profile_report"
-      get "profile/:user_id/report/new" => "reports#new", as: "profile_reports_new"
-      get 'users/confilm' => 'userss#confilm'
-      patch 'users/withdraw' => 'users#withdraw'
+    resources:users, only: [:show, :edit, :update, :destroy] do
+      member do
+        get "follows"
+        get "followers"
+      end
+      collection do
+        get "my_page" => "users#my_page"
+        get 'confilm'
+        patch 'withdraw'
+      end
+      resource :relations, only:[:create, :destroy]
+      resource :reports, only:[:new, :create]
     end
 
-    resources:posts, only: [:new, :create, :show, :edit, :update, :destroy] do
+    resources:posts, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       resources :post_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
       resource :wants, only: [:create, :destroy]
