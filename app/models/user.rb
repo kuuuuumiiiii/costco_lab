@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :wants, dependent: :destroy
   has_many :post_comments, dependent: :destroy
 
-  def get_image(width,height)
+  def get_profile_image(width,height)
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
       image.attach(io: File.open(file_path), filename: 'default-image.jpg'  , content_type: 'image/jpeg')
@@ -20,6 +20,6 @@ class User < ApplicationRecord
   end
 
   def name
-    last_name + first_name
+    first_name + last_name
   end
 end

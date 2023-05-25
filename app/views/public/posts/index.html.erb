@@ -2,10 +2,11 @@
 
 <% @posts.each do |post| %>
 <div>
-  <%= image_tag post.get_image(150,150) %>
-  <p>投稿ユーザー画像：<%= image_tag(50,50) 'no_image.jpg' %></p>
-  <p>タイトル ：<%= link_to post.title, post_path(post.id) %></p>
-  <p>説明：<%= post.body %></p>
-  <p>ユーザーネーム：<%= post.user.name %></p>
+  <%= image_tag post.user.get_profile_image(60,60) %><%= post.user.name %><br>
+  <%= image_tag post.get_image(300,300) %>
+  <p>タイトル</p>
+  <%= link_to post.title, post_path(post.id) %>
+  <p>説明</p>
+  <%= post.body %>
 </div>
 <% end %>
