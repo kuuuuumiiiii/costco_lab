@@ -1,0 +1,9 @@
+<h3>投稿詳細</h3>
+
+<div>
+  <%= image_tag post.get_image(150,150) %>
+  <p>投稿ユーザー画像：<%= image_tag(50,50) 'no_image.jpg' %></p>
+  <p>タイトル ：<%= post.title %></p>
+  <p>説明：<%= post.body %></p>
+  <p>ユーザーネーム：<%= post.user.name %></p>
+</div>
