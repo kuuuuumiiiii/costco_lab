@@ -1,5 +1,12 @@
-<h3>my_page</h3>
+<h3>マイページ</h3>
 <div>
-  <h3><%= @user.name %></h3>
-  <%= image_tag @user.get_profile_image(100,100) %>
+  <%= image_tag @user.get_profile_image(200,200) %>
+  <p>名前</p>
+  <p><%= @user.name %><p>
+  <p>紹介</p>
+  <p><%= @user.introduction %></p>
+</div>
+
+<div>
+  <%= link_to "編集", edit_user_path(@user.id) %>
 </div>
